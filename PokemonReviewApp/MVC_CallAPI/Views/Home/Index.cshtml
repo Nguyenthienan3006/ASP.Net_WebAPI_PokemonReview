@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemons List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Pokemons List</h2>
+    <table id="pokemonTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Owner Name</th>
+                <th>Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be appended here -->
+        </tbody>
+    </table>
+
+    <div id="responseMessage"></div>
+
+    <script>
+        // Function to call the API and populate the table
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://localhost:7036/api/Pokemon', // Replace with your actual API endpoint
+                type: 'GET',
+                success: function (response) {
+                    // Check if the response contains data
+                    if (response && response.length > 0) {
+                        var tableBody = $('#pokemonTable tbody');
+                        tableBody.empty(); // Clear any existing data
+
+                        // Loop through the response and append each row to the table
+                        $.each(response, function (index, pokemon) {
+                            var row = '<tr>' +
+                                '<td>' + pokemon.id + '</td>' +
+                                '<td>' + pokemon.name + '</td>' +
+                                '<td>' + new Date(pokemon.birthDate).toLocaleDateString() + '</td>' +
+                                '<td>' + pokemon.ownerName + '</td>' +
+                                '<td>' + pokemon.categoryName + '</td>' +
+                                '</tr>';
+                            tableBody.append(row);
+                        });
+                    } else {
+                        $('#responseMessage').html('<p>No Pokemons found.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors
+                    var errorMessage = xhr.status + ': ' + xhr.statusText;
+                    $('#responseMessage').html('<p style="color: red;">Error - ' + errorMessage + '</p>');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
