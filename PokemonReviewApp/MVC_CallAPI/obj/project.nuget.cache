@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "B0ysC+CAOXbVyeqd2+YI0h76Wj3PjUOXkCC6QW9qX9VZLe9lCIM16rj/iRa2C6Gar+C6cxQeAu8xvfR2+ZuFzQ==",
+  "dgSpecHash": "D4Zcgof+XIOVEqImgUsd2moymncDEG6Yqj33nBW5RRERs1++SVc9gd8t+KhqtX9TGAnyzdP7oZG8jJXXZb9Ejw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\PokemonReviewApp\\MVC_CallAPI\\MVC_CallAPI.csproj",
+  "projectFilePath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\ASP.Net_WebAPI_PokemonReview\\PokemonReviewApp\\MVC_CallAPI\\MVC_CallAPI.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

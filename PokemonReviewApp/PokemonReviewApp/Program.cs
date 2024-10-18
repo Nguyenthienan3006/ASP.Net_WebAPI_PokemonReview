@@ -37,6 +37,17 @@ namespace PokemonReviewApp
             );
 
 
+            //cấu hình để call API từ MVC
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
             var app = builder.Build();
 
 
@@ -50,7 +61,13 @@ namespace PokemonReviewApp
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            //cấu hình để call API từ MVC
+            app.UseCors("AllowAll");
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.MapControllers();
 

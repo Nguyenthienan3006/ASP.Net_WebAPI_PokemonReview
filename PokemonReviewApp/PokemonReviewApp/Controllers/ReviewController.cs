@@ -78,7 +78,7 @@ namespace PokemonReviewApp.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateReview([FromQuery] int reviewId, [FromQuery] int pokeId, [FromBody] ReviewDto reviewCreate)
+        public IActionResult CreateReview([FromQuery] int reviewerId, [FromQuery] int pokeId, [FromBody] ReviewDto reviewCreate)
         {
             if(reviewCreate == null)
             {
@@ -102,7 +102,7 @@ namespace PokemonReviewApp.Controllers
 
             var reviewMap = _mapper.Map<Review>(reviewCreate);
 
-            reviewMap.Reviewer = _reviewerRepository.GetReviewer(reviewId);
+            reviewMap.Reviewer = _reviewerRepository.GetReviewer(reviewerId);
             reviewMap.Pokemon = _pokemonRepository.GetPokemon(pokeId);
 
             if (!_reviewRepository.CreateReview(reviewMap))
@@ -112,6 +112,45 @@ namespace PokemonReviewApp.Controllers
             }
 
             return Ok("Successfully created");
+        }
+
+
+        //sửa lại hàm update review (thêm pokeId)
+        [HttpPut("{reviewId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateReview(int reviewId, [FromBody] ReviewDto reviewUpdate)
+        {
+            if (reviewUpdate == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (reviewId != reviewUpdate.Id)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_reviewRepository.ReviewExist(reviewId))
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var reviewMap = _mapper.Map<Review>(reviewUpdate);
+
+            if (!_reviewRepository.UpdateReview(reviewMap))
+            {
+                ModelState.AddModelError("", "Something went wrong updating review");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Update Successfully");
         }
     }
 }

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\PokemonReviewApp\\MVC_CallAPI\\MVC_CallAPI.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\ASP.Net_WebAPI_PokemonReview\\PokemonReviewApp\\MVC_CallAPI\\MVC_CallAPI.csproj",
       "projectName": "MVC_CallAPI",
-      "projectPath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\PokemonReviewApp\\MVC_CallAPI\\MVC_CallAPI.csproj",
+      "projectPath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\ASP.Net_WebAPI_PokemonReview\\PokemonReviewApp\\MVC_CallAPI\\MVC_CallAPI.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\PokemonReviewApp\\MVC_CallAPI\\obj\\",
+      "outputPath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\ASP.Net_WebAPI_PokemonReview\\PokemonReviewApp\\MVC_CallAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

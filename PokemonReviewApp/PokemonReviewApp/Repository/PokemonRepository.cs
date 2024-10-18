@@ -68,13 +68,49 @@ namespace PokemonReviewApp.Repository
 
         public bool PokemonExist(int pokeId)
         {
-            return _context.Pokemon.Any(p => p.Id == pokeId);        
+            return _context.Pokemon.Any(p => p.Id == pokeId);
         }
 
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
+        }
+
+        public bool UpdatePokemon(int ownerId, int categoryId, Pokemon pokemon)
+        {
+            var pokemonOwnerNew = _context.Owners.Where(o => o.Id == ownerId).FirstOrDefault();
+            var pokemonCategoryNew = _context.Categories.Where(c => c.Id == categoryId).FirstOrDefault();
+
+            //====update pokemon owner====
+            //1.find old record
+            var pokemonOwnerOld = _context.PokemonOwners.Where(o => o.PokemonId == pokemon.Id).FirstOrDefault();
+            _context.PokemonOwners.Remove(pokemonOwnerOld);
+            //2.remove old record
+            PokemonOwner pokemonOwner = new PokemonOwner()
+            {
+                Owner = pokemonOwnerNew,
+                Pokemon = pokemon
+            };
+            //3.add new record
+            _context.PokemonOwners.Add(pokemonOwner);
+
+
+            //====update pokemon category====
+            var pokemonCategoryOld = _context.PokemonCategories.Where(c => c.PokemonId == pokemon.Id).FirstOrDefault();
+            //1.find old record
+            _context.PokemonCategories.Remove(pokemonCategoryOld);
+            //2.remove old record
+            PokemonCategory pokemonCategory = new PokemonCategory()
+            {
+                Category = pokemonCategoryNew,
+                Pokemon = pokemon
+            };
+            //3.add new record
+            _context.PokemonCategories.Add(pokemonCategory);
+
+            _context.Pokemon.Update(pokemon);
+            return Save();
         }
     }
 }

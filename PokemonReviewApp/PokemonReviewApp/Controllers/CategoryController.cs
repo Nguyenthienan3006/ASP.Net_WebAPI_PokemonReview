@@ -137,7 +137,7 @@ namespace PokemonReviewApp.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return NoContent();
+            return Ok("Update Successfully");
         }
 
     }

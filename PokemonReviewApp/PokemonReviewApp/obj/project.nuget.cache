@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ltu9pdPcNps8l3DozHQ7jySArowpH17VRj01kEF717WL3pajCrw1Z0VW0PaMaFGRVK6gliU2V8y9sBUt/70eDQ==",
+  "dgSpecHash": "EHDfXuIs46KeAokRKlwVy9s9qWtVKLZ7nUTGXaHi67HwkHY27939qlW+vMieruUnz6DDPAqcMSeIeoHg1LG31w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\PokemonReviewApp\\PokemonReviewApp\\PokemonReviewApp.csproj",
+  "projectFilePath": "C:\\Users\\admin\\Desktop\\WorkSpace\\FPT Semester\\BL5 SU24\\API_SelfLearn\\Code\\ASP.Net_WebAPI_PokemonReview\\PokemonReviewApp\\PokemonReviewApp\\PokemonReviewApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
