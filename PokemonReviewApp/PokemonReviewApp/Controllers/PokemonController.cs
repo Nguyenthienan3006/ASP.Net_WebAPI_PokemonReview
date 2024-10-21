@@ -112,6 +112,9 @@ namespace PokemonReviewApp.Controllers
         }
 
         [HttpPut("pokemonId")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
         public IActionResult UpdatePokemon(int ownerId, int categoryId, int pokemonId, [FromBody] PokemonDto pokemonUpdate)
         {
             if (pokemonUpdate == null)
@@ -147,5 +150,31 @@ namespace PokemonReviewApp.Controllers
 
         }
 
+        [HttpDelete("{pokemonId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult DeleteCategory(int pokemonId)
+        {
+            if (!_pokemonRepository.PokemonExist(pokemonId))
+            {
+                return NotFound();
+            }
+
+            var pokemonToDelete = _pokemonRepository.GetPokemon(pokemonId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_pokemonRepository.DeletePokemon(pokemonToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting pokemon");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Delete successfully");
+        }
     }
 }

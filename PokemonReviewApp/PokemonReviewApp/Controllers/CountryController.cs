@@ -60,7 +60,7 @@ namespace PokemonReviewApp.Controllers
 
             return Ok(country);
         }
-        
+
         [HttpGet("/ownerOfCountry")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Owner>))]
         [ProducesResponseType(400)]
@@ -81,7 +81,7 @@ namespace PokemonReviewApp.Controllers
         [ProducesResponseType(400)]
         public IActionResult CreateCountry([FromBody] CountryDto countryCreate)
         {
-            if(countryCreate == null)
+            if (countryCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -90,13 +90,13 @@ namespace PokemonReviewApp.Controllers
                 Where(c => c.Name.Trim().ToLower() == countryCreate.Name.TrimEnd().ToLower()).
                 FirstOrDefault();
 
-            if(country != null)
+            if (country != null)
             {
                 ModelState.AddModelError("", "Country already exists!");
                 return StatusCode(422, ModelState);
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -118,12 +118,12 @@ namespace PokemonReviewApp.Controllers
         [ProducesResponseType(404)]
         public IActionResult UpdateCountry(int countryId, [FromBody] CountryDto countryUpdate)
         {
-            if(countryUpdate == null)
+            if (countryUpdate == null)
             {
                 return BadRequest(ModelState);
             }
 
-            if(countryId != countryUpdate.Id)
+            if (countryId != countryUpdate.Id)
             {
                 return BadRequest(ModelState);
             }
@@ -147,6 +147,33 @@ namespace PokemonReviewApp.Controllers
             }
 
             return Ok("Update Successfully");
+        }
+
+        [HttpDelete("{countryId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult DeleteCountry(int countryId)
+        {
+            if (!_countryRepository.CountryExist(countryId))
+            {
+                return NotFound();
+            }
+
+            var countryToDelete = _countryRepository.GetCountry(countryId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_countryRepository.DeleteCountry(countryToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting country");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Delete successfully");
         }
     }
 }

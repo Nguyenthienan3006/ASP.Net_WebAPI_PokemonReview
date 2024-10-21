@@ -38,6 +38,20 @@ namespace PokemonReviewApp.Repository
             return Save();
         }
 
+        public bool DeletePokemon(Pokemon pokemon)
+        {
+            //remove pokemon owner
+            var pokemonOwnerOld = _context.PokemonOwners.Where(o => o.PokemonId == pokemon.Id).FirstOrDefault();
+            _context.PokemonOwners.Remove(pokemonOwnerOld);
+
+            //remove pokemon category
+            var pokemonCategoryOld = _context.PokemonCategories.Where(c => c.PokemonId == pokemon.Id).FirstOrDefault();
+            _context.PokemonCategories.Remove(pokemonCategoryOld);
+
+            _context.Pokemon.Remove(pokemon);
+            return Save();
+        }
+
         public ICollection<Pokemon> GetAll()
         {
             return _context.Pokemon.Include(p => p.PokemonOwners).ThenInclude(p => p.Owner)

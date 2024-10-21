@@ -114,8 +114,6 @@ namespace PokemonReviewApp.Controllers
             return Ok("Successfully created");
         }
 
-
-        //sửa lại hàm update review (thêm pokeId)
         [HttpPut("{reviewId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
@@ -151,6 +149,33 @@ namespace PokemonReviewApp.Controllers
             }
 
             return Ok("Update Successfully");
+        }
+
+        [HttpDelete("{reviewId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult DeleteCategory(int reviewId)
+        {
+            if (!_reviewRepository.ReviewExist(reviewId))
+            {
+                return NotFound();
+            }
+
+            var reviewToDelete = _reviewRepository.GetReview(reviewId);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_reviewRepository.DeleteReview(reviewToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting review");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Delete successfully");
         }
     }
 }
